@@ -4,7 +4,7 @@ import Board from './Board.jsx';
 import Reset from './Reset.jsx';
 import { connect } from 'react-redux';
 import { playPosition, reset } from './../redux/actions';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 
 
 class App extends React.Component {
@@ -31,6 +31,10 @@ class App extends React.Component {
         <Board values={this.props.values}  appClick={this.appClick}/>
         <Text style={{fontSize: 25, padding: 30, textAlign:'center'}}>Number of moves: {this.props.moves}</Text>
         <Reset resetClick={this.resetClick}/>
+        <TouchableHighlight onPress={() => this.props.navigation.goBack()} >
+          <Text style={styles.button}>Go Back</Text>
+        </TouchableHighlight>
+
       </View>
     );
 }
@@ -40,3 +44,14 @@ function mapStateToProps(state) {
   return { ...state };
 }
 export default connect(mapStateToProps)(App);
+
+const styles = StyleSheet.create({
+  button: {
+    borderWidth: 1,
+    borderColor: 'black',
+    backgroundColor: '#eee',
+    fontSize: 25,
+    textAlign: 'center',
+    padding: 10
+  }
+});
